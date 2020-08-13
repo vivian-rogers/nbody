@@ -130,7 +130,7 @@ double * vectorSubtract(double *pointA, double *pointB){ // given two points to 
 
 int addObject(char* _name, double _mass, double _pos0, double _pos1, double _pos2, double _vel0, double _vel1, double _vel2, int _color){ // call to add a body to the list 
 	if(currentBodies >= maxBodies){
-		return 0; //you got too many bodies!!! increase maxbodies
+		return 0; //you have too many bodies!!! increase maxbodies
 	}	
 	body* temp = (body *) malloc(sizeof(body));
 	strcpy(temp->name,_name);
@@ -172,18 +172,24 @@ void printBodies(body* solarSystem[], int dt, int timestep){ // prints the coord
 int main(int argc, char *argv[]) { //sets up and drives motion of the planets
 
 	int dt;
-	int years;
-	dt = atoi(argv[1]) * 3600;	//so pass argv[1] in timesteps of hours, dt is in units of seconds
-	years = atoi(argv[2]);
+	float years;
+	if(argc <= 2){
+		printf("please run with './nbody [timestep size in hours] [number of years to run]'\n");
+		return 0;
+	}
+	dt = atof(argv[1]) * 3600;	//so pass argv[1] in timesteps of hours, dt is in units of seconds
+	years = atof(argv[2]);
 	initSystem(solarSystem,initBodies);
   	for(int i = 0; i < years*365.25*24*3600/dt; i++){
 		calculateAccel(solarSystem);
 		calculateVel(solarSystem,dt);
 		calculatePos(solarSystem,dt);
 		printBodies(solarSystem,dt,i);
+		//if(addflag){
+		//}
 	}
 	freeMem(solarSystem);
-  	return 0;
+  	return 1;
 }
 
 
