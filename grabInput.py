@@ -8,13 +8,13 @@ def findNumBodies():
 def promptBodyInfo():
      global counter
      bodyInfo = []
-     bodyInfo.append(input("Please enter the name of the " + str(counter) + " body: \n"))
-     bodyInfo.append(float(input("Please enter the mass of the " + str(counter) + " body in kg: \n")))
+     bodyInfo.append(input("Please enter the name of body " + str(counter) + ": \n"))
+     bodyInfo.append(float(input("Please enter the mass of body " + str(counter) + " in kg: \n")))
      tempCords = input("Please enter the cords of the " + str(counter) + " body in meters: \n").split()
      bodyInfo.append(list(map(float, tempCords)))
-     tempVelocity = input("Please enter the velocity in 3d space of the " +str(counter)+" body in m/s: \n").split()
+     tempVelocity = input("Please enter the velocity in 3d space of body " + str(counter) + " in m/s: \n").split()
      bodyInfo.append(list(map(float, tempVelocity)))
-     tempColor = input("Please enter the color of the "+str(counter)+" body in hex: \n")
+     tempColor = input("Please enter the color of body "+str(counter)+" in hex: \n")
      bodyInfo.append(int(tempColor))
      counter+=1
      return bodyInfo
