@@ -4,8 +4,8 @@
 # make (without arguments) executes first rule in file
 # Ideally, one target for every object file and a target for final binary. 
 
-nbody: nbody_driver.c
-	gcc -o nbody nbody_driver.c -lm
+nbody: nbody_engine.c
+	gcc -o nbody nbody_engine.c -lm
 #	c99 -o nbody nbody_driver.o
 #
 #nbody_driver.o: nbody_driver.c
