@@ -187,7 +187,8 @@ int main(int argc, char *argv[]) { //sets up and drives motion of the planets
 		//}
 	}
 	freeMem(solarSystem);
-  	return 1;
+  	printf("Done!");
+	return 1;
 }
 
 
