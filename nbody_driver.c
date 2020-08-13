@@ -1,7 +1,7 @@
 //VIV MADE THIS
 //WELCOME TO THE VIV ZONE
 //RUN WITH ./nbody [timestep in hours] [number of years to run]
-
+//test
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,7 +11,7 @@
 
 
 
-#define maxBodies 10
+#define maxBodies 20
 
 
 typedef struct body { // declares the attributes of a body
