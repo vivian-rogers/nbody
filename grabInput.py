@@ -10,7 +10,7 @@ def promptBodyInfo():
      bodyInfo = []
      bodyInfo.append(input("Please enter the name of body " + str(counter) + ": \n"))
      bodyInfo.append(float(input("Please enter the mass of body " + str(counter) + " in kg: \n")))
-     tempCords = input("Please enter the cords of the " + str(counter) + " body in meters: \n").split()
+     tempCords = input("Please enter the cords of body " + str(counter) + " in meters: \n").split()
      bodyInfo.append(list(map(float, tempCords)))
      tempVelocity = input("Please enter the velocity in 3d space of body " + str(counter) + " in m/s: \n").split()
      bodyInfo.append(list(map(float, tempVelocity)))
