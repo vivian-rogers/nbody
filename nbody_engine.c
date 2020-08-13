@@ -11,6 +11,8 @@
 
 
 #define maxBodies 20
+#define au 149597870700			//astronomical units in metres
+#define gc 6.67384e-11 			//gravitational constant in N*m^2/kg^2
 
 
 typedef struct body { // declares the attributes of a body
@@ -23,8 +25,6 @@ typedef struct body { // declares the attributes of a body
 } body;
 
 int currentBodies = maxBodies;			//initializes the current number of bodies to the max 
-const double gc = 6.67384 * pow(10,-11); 	//gravitational constant in metric
-const double au = 149597870700;			//astronomical units in metres
 
 body *solarSystem[maxBodies];			//array of pointers to bodies
 
@@ -40,13 +40,11 @@ int addObject(char* _name, double _mass, double _pos0, double _pos1, double _pos
 void printBodies(body* solarSystem[], int dt, int timestep);
 
 
-
 const body initBodies[] = {			//just some test bodies
-	{"sun", 1.985*pow(10,30), {0,0,0}, {0,-0.0894,0}, {0,0,0}, 0xFFFF0000},
-	{"earth", 5.972*pow(10,24), {149597870700,0,0}, {0,29.78*1000,0}, {0,0,0}, 0x0000FFFF},
-	{"moon", 7.3459*pow(10,22), {149597870700,-0.3844 * pow(10,9),0}, {1022,29.78*1000,0}, {0,0,0}, 0x88888888}
+	{"sun", 1.985e+30, {0,0,0}, {0,-0.0894,0}, {0,0,0}, 0xFFFF0000},
+	{"earth", 5.972e24, {149597870700,0,0}, {0,29.78*1000,0}, {0,0,0}, 0x0000FFFF},
+	{"moon", 7.3459e22, {149597870700,-0.3844e9,0}, {1022,29.78*1000,0}, {0,0,0}, 0x88888888}
 };
-
 
 
 void initSystem(body *solarSystem[],const body _initBodies[]){		//fills up solarsystem with the bodies defined in initBodies
