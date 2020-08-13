@@ -1,4 +1,4 @@
-from start import MstBodies
+from generateBodies import MstBodies
 #Return the color as a hex value
 def getColor(i):
 	return MstBodies()[i][5]
