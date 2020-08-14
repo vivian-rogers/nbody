@@ -43,8 +43,8 @@ void printBodies(body* solarSystem[], int dt, int timestep);
 
 const body initBodies[] = {			//just some test bodies
 	{"sun", 1.985e+30, {0,0,0}, {0,-0.0894,0}, {0,0,0}, 0xFFFF0000},
-	{"earth", 5.972e24, {149597870700,0,0}, {0,29.78*1000,0}, {0,0,0}, 0x0000FFFF},
-	{"moon", 7.3459e22, {149597870700,-0.3844e9,0}, {1022,29.78*1000,0}, {0,0,0}, 0x88888888}
+	{"earth", 5.972e24, {1 * au, 0,		0.1 * au}, {0,29.78*1000,0}, {0,0,0}, 0x0000FFFF},
+	{"moon", 7.3459e22, {1 * au,-0.3844e9,	0.1 * au}, {1022,29.78*1000,0}, {0,0,0}, 0x88888888}
 };
 
 
@@ -180,7 +180,7 @@ int main(int argc, char *argv[]) { //sets up and drives motion of the planets
 		calculateAccel(solarSystem);
 		calculateVel(solarSystem,dt);
 		calculatePos(solarSystem,dt);
-		//printBodies(solarSystem,dt,i);
+		printBodies(solarSystem,dt,i);
 		//if(addflag){
 		//}
 	}
