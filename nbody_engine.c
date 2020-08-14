@@ -35,7 +35,8 @@ void calculateAccel(body* solarSystem[]);
 void calculateVel(body* solarSystem[], int dt);
 void calculatePos(body* solarSystem[], int dt);
 double norm(double* pointA);
-double * vectorSubtract(double *pointA, double *pointB);
+//double * vectorSubtract(double *pointA, double *pointB);
+void vectorSubtract(double * result, double *pointA, double *pointB);
 int addObject(char* _name, double _mass, double _pos0, double _pos1, double _pos2, double _vel0, double _vel1, double _vel2, int _color); 
 void printBodies(body* solarSystem[], int dt, int timestep);
 
@@ -67,31 +68,28 @@ void freeMem(body* solarSystem[]){	//when we are done, it is good to give resour
 
 void calculateAccel(body* solarSystem[]){	//given the solar system of bodies, it will calculate the forces and accelerations of all bodies from each other
 	for(int i = 0; i < currentBodies; i++){	
-		double* pointA = malloc(3*sizeof(double));
+		double pointA[3];
 		for(int dim = 0; dim < 3; dim++){		//defines the origin point
-			*(pointA + dim) = solarSystem[i]->pos[dim];
+			pointA[dim] = solarSystem[i]->pos[dim];
 		}
 		for(int j = 0; j < currentBodies; j++){
 			if(i != j){
 				double radius;
-				double* distVect;
-				double* pointB = malloc(3*sizeof(double));	//defines secondary point
+				double distVect[3];
+				double pointB[3];	//defines secondary point
 				for(int dim = 0; dim < 3; dim++){
-					*(pointB + dim) = solarSystem[j]->pos[dim];
+					pointB[dim] = solarSystem[j]->pos[dim];
 				}
-				distVect = vectorSubtract(pointA,pointB);
-				radius = norm(distVect);
+				vectorSubtract(&distVect[0],&pointA[0],&pointB[0]);
+				radius = norm(&distVect[0]);
 				for(int dim = 0; dim < 3; dim++){		//calculates force from F_g = - Gc*m1*m2/r^2 * r_hat
 					solarSystem[i]->acc[dim] -= distVect[dim] * (solarSystem[i]->mass) * (solarSystem[j]->mass) * gc / pow(radius,3);
 				}
-				free(distVect);
-				free(pointB);
 			}
 		}
 		for(int dim = 0; dim < 3; dim++){	//calculates accel from a = Sigma(F) / m
 			solarSystem[i]->acc[dim] = solarSystem[i]->acc[dim] / solarSystem[i]->mass;
 		}
-		free(pointA);
 	}
 }
 
@@ -118,12 +116,12 @@ double norm(double* pointA){ //takes sqrt(x^2 + y^2 + z^2) of a given vector poi
 	}
 	return pow(sum,0.5);
 }
-double * vectorSubtract(double *pointA, double *pointB){ // given two points to double arrays, will subtract them element wise and return a vector to a new 3-array
-	double* temp = (double *) malloc(3*sizeof(double));	
+void vectorSubtract(double * result, double *pointA, double *pointB){ // given two points to double arrays, will subtract them element wise and return a vector to a new 3-array
+	//double* temp = (double *) malloc(3*sizeof(double));	
 	for(int dim = 0; dim < 3; dim++){
-		*(temp + dim) = *(pointA + dim) - *(pointB + dim);
+		*(result + dim) = *(pointA + dim) - *(pointB + dim);
 	}
-	return temp;
+	return;
 }
 
 int addObject(char* _name, double _mass, double _pos0, double _pos1, double _pos2, double _vel0, double _vel1, double _vel2, int _color){ // call to add a body to the list 
@@ -182,12 +180,12 @@ int main(int argc, char *argv[]) { //sets up and drives motion of the planets
 		calculateAccel(solarSystem);
 		calculateVel(solarSystem,dt);
 		calculatePos(solarSystem,dt);
-		printBodies(solarSystem,dt,i);
+		//printBodies(solarSystem,dt,i);
 		//if(addflag){
 		//}
 	}
 	freeMem(solarSystem);
-  	printf("Done!");
+  	printf("Done!\n");
 	return 1;
 }
 
